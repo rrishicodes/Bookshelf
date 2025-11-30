@@ -1,0 +1,9 @@
+<?php
+session_start();
+$sesid=$_SESSION['user'];
+if(!$sesid){
+    header("location:admin.php");
+}
+session_destroy();
+header("location:admin.php");
+?>

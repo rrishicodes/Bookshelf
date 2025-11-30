@@ -1,0 +1,131 @@
+<?php
+
+$con=mysqli_connect("localhost","root","","bookshelf");
+if(!$con)
+{
+    echo "no connection";
+}
+else{
+  #  echo "connection";
+}
+$select="select * from category";
+$res=mysqli_query($con,$select);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+   <title>Dashoard</title>
+   <link rel="icon" href="../img/admin (1).png" type="image/x-icon">
+   <style>
+       .style{
+           background:linear-gradient(white,rgb(238, 189, 54));
+           font-size: xx-large;
+           text-align: center;
+       }
+       .style_n{
+           background:linear-gradient(rgb(224, 95, 95),rgb(88, 88, 88));
+           font-size: larger;
+           
+       }
+       .side_bar{
+           height: 100%;
+           background: linear-gradient(rgb(114, 170, 253),rgb(73, 73, 248));
+           width: 100%;
+           text-align: center;
+           font-size:larger;
+           font-weight: 700;
+       }
+       .text{
+           color: cornsilk;
+       }
+       .text:hover{
+           color: darkblue;
+       }
+       .text_n{
+           color: rgb(26, 25, 24);
+       }
+       .text_n:hover{
+        color: rgb(26, 25, 24);
+       }
+       #back{
+           background: linear-gradient(rgb(226, 248, 30),rgb(255, 60, 0),brown);
+           border-radius: 10px;
+       }
+       #back:hover{
+        background: linear-gradient(rgb(226, 248, 30),rgb(132, 132, 228),red);
+       }
+       .table_style{
+           background:linear-gradient(white,rgb(65, 62, 62));
+           color: black;
+       }
+       .element{
+        font-weight: 450;
+       }
+       #reset{
+           text-align:left;
+
+       }
+       #resetn{
+           text-align:right;
+         
+
+       }
+       .left{
+           float:left;
+       }
+
+   </style>
+</head>
+<body>
+    <div class="container-fluid style" style="z-index:999; ">
+        <div class="row">
+            <div class="col-sm-12 p-2 "> Admin Dashboard</div>
+        </div>
+    </div>
+    <div class="container-fluid" style="width:100%;">
+        <div class="row" style="background: rgb(185, 205, 248);">
+            <div class="col-sm-3 side_bar pt-2 ">
+                <img src="../img/elf-icon.png" alt="" height="50px">&nbsp;<span style="font-size: xx-large; font-family: cursive; ">Bookshelf</span><br>
+                 <div class="style_n row mt-2">
+                     <div class="col-sm-12 p-2 "><a href="dashboard.php" class="text_n"  style="text-decoration: none;">Dashboard</a></div>
+                 </div>
+                <br>
+                <a href="all_registration.php" class="text" style="text-decoration: none;">All Registration</a><br><br>
+                <a href="all_contact.php" class="text" style="text-decoration: none;">All Contact</a><br><br>
+                <a href="add_gallary.php" class="text" style="text-decoration: none;">Add Gallery</a><br><br>
+                <a href="show_gallary.php" class="text" style="text-decoration: none;">Show Gallery </a><br><br>
+                <a href="add_category.php" class="text" style="text-decoration: none;">Add Category</a><br><br>
+                <a href="show_category.php" class="text" style="text-decoration: none;">Show Category</a><br><br>
+                <a href="add_books.php" class="text" style="text-decoration: none;">Add Books</a><br><br>
+                <a href="show_books.php" class="text" style="text-decoration: none;">Show Books</a><br><br>
+                <a href="change_password.php" class="text" style="text-decoration: none;">Change Password</a><br><br>
+                <a href="logout.php" class="text" style="text-decoration: none;">Log Out</a><br><br><br>
+                <br>
+            
+            </div>
+            <div class="col-sm-9 pb-2" >
+          
+            <div class="row ml-5 mt-2">
+            <?php
+                while ($r=mysqli_fetch_array($res,MYSQLI_BOTH))
+                {
+            ?>
+                    <div class="col-sm-2 card pt-3 mr-1 ml-1  " >
+                       <img src="../img/add_category/<?php echo $r['1']?>" height="70%" width="100%">
+                       <span class="text-center font-weight-bold"><?php echo $r['2']?></span>
+                       <a href="delete_category.php?ids=<?php echo $r['0'];?>" style="text-align:center">Delete</a>     
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php
+                }
+            ?>         
+            </div>  
+        </div>
+    </div>
+</body>
+</html>
